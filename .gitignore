@@ -1,0 +1,11 @@
+# NetBeans con Ant
+build/
+dist/
+nbproject/private/
+
+# Por si alguien usa Maven
+target/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
