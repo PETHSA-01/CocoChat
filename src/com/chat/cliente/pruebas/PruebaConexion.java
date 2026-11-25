@@ -3,6 +3,7 @@ package com.chat.cliente.pruebas;
 import com.chat.cliente.ConexionServidor;
 import com.chat.common.Peticion;
 import com.chat.common.Protocolo;
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,6 +14,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import javax.swing.UIManager;
 
 /**
  * Prueba ConexionServidor SIN esperar al servidor real del integrante 1.
@@ -25,6 +27,8 @@ import java.util.concurrent.TimeUnit;
 public class PruebaConexion {
 
     public static void main(String[] args) throws Exception {
+        
+        
         int puerto = 5050;
         CountDownLatch recibidos = new CountDownLatch(2);
 
