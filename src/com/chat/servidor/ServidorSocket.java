@@ -1,5 +1,7 @@
 package com.chat.servidor;
 
+import com.chat.servidor.bd.ConexionBD;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -141,7 +143,8 @@ public class ServidorSocket {
                 ServidorSocket servidor = new ServidorSocket(puerto, ventana);
 
                 // Cada equipo agrega aqui SU manejador cuando ya lo tenga:
-                // servidor.getDespachador().registrar(new ManejadorAuth());     // equipo 1
+                ConexionBD.inicializar(ventana);                                // equipo 1: crea BD y tablas
+                servidor.getDespachador().registrar(new ManejadorAuth());       // equipo 1
                 // servidor.getDespachador().registrar(new ManejadorChats());    // equipo 2
                 // servidor.getDespachador().registrar(new ManejadorGrupos());   // equipo 3
 

@@ -1,0 +1,32 @@
+EQUIPO 1 - BASE DE DATOS Y AUTENTICACION (Integrante 3)
+
+ARCHIVOS
+- src/com/chat/servidor/bd/ConexionBD.java   Conexion a MySQL de XAMPP; crea la BD y tablas al arrancar
+- src/com/chat/servidor/bd/UsuarioDAO.java   Todo el SQL de la tabla usuarios
+- src/com/chat/servidor/ManejadorAuth.java   REGISTRO, LOGIN (3 intentos), RECUPERAR, LOGOUT, USUARIOS
+- src/com/chat/servidor/pruebas/PruebaAuth.java   Prueba automatica (necesita MySQL encendido)
+- bd/cocochat.sql                             Script de la BD (opcional, para phpMyAdmin / diagrama)
+- lib/mariadb-java-client-2.7.6.jar           Driver JDBC (XAMPP usa MariaDB). Ya esta en el proyecto.
+
+COMO ARRANCAR
+1. XAMPP -> Start en MySQL (usuario root sin contrasena, como viene por defecto).
+2. Ejecutar com.chat.servidor.ServidorSocket. La ventana de log dice
+   "Base de datos 'cocochat' lista" si todo salio bien.
+
+PROTOCOLO (para quien hace las pantallas y ConexionServidor)
+REGISTRO|usuario|contrasena|correo|pregunta|respuesta
+   OK|REGISTRO|usuario
+   ERROR|REGISTRO|motivo
+LOGIN|usuario|contrasena
+   OK|LOGIN|usuario
+   ERROR|LOGIN|Usuario o contrasena incorrectos|N    N = intentos restantes (2, 1, 0)
+   ERROR|LOGIN|El usuario ya tiene una sesion abierta
+   Si N es 0 -> mandar a la pantalla de Recuperacion.
+RECUPERAR|usuario                 OK|RECUPERAR|PREGUNTA|texto    o  ERROR|RECUPERAR|El usuario no existe
+RECUPERAR|usuario|respuesta       OK|RECUPERAR|CONTRASENA|clave  o  ERROR|RECUPERAR|Respuesta incorrecta
+LOGOUT|usuario                    OK|LOGOUT
+USUARIOS|usuario                  OK|USUARIOS|ana:1,beto:0   (no incluye a quien pregunta)
+EVENTO|ESTADO|usuario|1 o 0       Llega solo cuando alguien entra, sale o se registra
+                                  (si el usuario no estaba en la lista, agregarlo).
+
+Leer las respuestas con Protocolo.leer(...) y la lista con Protocolo.leerListaUsuarios(...).
